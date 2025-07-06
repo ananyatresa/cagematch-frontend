@@ -1,8 +1,8 @@
 @font-face {
   font-family: 'Bright';
   /* FOR local windows run */
-  /* src: url('\\fonts\\bright.otf') format('opentype');   */
-  src: url('/fonts/bright.otf') format('opentype');
+  /* src: url('\\fonts\\bright_font.otf') format('opentype');   */
+  src: url('/fonts/bright_font.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
