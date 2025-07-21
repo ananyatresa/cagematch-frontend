@@ -3,7 +3,7 @@
   display: flex;                          /* Put items side by side */
   justify-content: space-between;        /* Space between left and right sections */
   align-items: center;                   /* Center items vertically */
-  background-color: #4f1288;             /* Dark purple background */
+  background: linear-gradient(135deg, #2e1a47, #40354f);             /* Dark purple background */
   color:  #e1da0c;                          /* White text */
   padding: 16px 24px;                    /* Space inside navbar */
   position: sticky;                      /* Sticks to the top when scrolling */

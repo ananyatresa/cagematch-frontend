@@ -1,9 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import './Navbar.css'; // This line brings in your CSS styles
 
-export default function Navbar() {
+export default function Navbar({ setIsAuthenticated }) {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        localStorage.removeItem('token'); 
+        setIsAuthenticated(false); 
+        navigate('/login'); 
+      };
 
     // Close dropdown on click outside
     useEffect(() => {
@@ -41,7 +48,7 @@ export default function Navbar() {
                         <div className="dropdown">
                             <div className="dropdown-item">View Profile</div>
                             <div className="dropdown-item">Account Settings</div>
-                            <div className="dropdown-item">Logout</div>
+                            <div className="dropdown-item" onClick={handleLogout}>Logout</div>
                         </div>
                     )}
                 </div>
