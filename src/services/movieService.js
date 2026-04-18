@@ -11,7 +11,7 @@ export const getMoviesByGenre = async () => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }
+      },
     );
     return response.data.result;
   } catch (error) {
@@ -31,7 +31,7 @@ export const getMovieDetails = async (movie_id) => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }
+      },
     );
     return response.data.result;
   } catch (error) {
@@ -50,7 +50,7 @@ export const addToWatchlist = async (movie_id, watchlist_toggle) => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }
+      },
     );
   } catch (error) {
     console.error("Error adding to watchlist: ", error);
