@@ -40,6 +40,24 @@ export const getMovieDetails = async (movie_id) => {
   }
 };
 
+export const getWatchlist = async () => {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await axios.get(
+      `${API_BASE_URL}/cagematch/get_user_watchlist`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+    return response.data.result;
+  } catch (error) {
+    console.error("Error fetching watchlist: ", error);
+    return [];
+  }
+};
+
 export const addToWatchlist = async (movie_id, watchlist_toggle) => {
   try {
     const token = localStorage.getItem("token");
