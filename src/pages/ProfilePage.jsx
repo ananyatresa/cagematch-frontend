@@ -4,6 +4,7 @@ import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 import { getMoviesByGenre, getMovieDetails } from "../services/movieService";
 import MovieModal from "../components/MovieModal";
+import Spinner from "../components/Spinner";
 
 
 const ProfilePage = ({ setIsAuthenticated }) => {
@@ -79,7 +80,7 @@ const ProfilePage = ({ setIsAuthenticated }) => {
   
       {/* Foreground Content */}
       <div style={{ position: "relative", zIndex: 1 }}>
-        <Navbar setIsAuthenticated={setIsAuthenticated} />
+        <Navbar setIsAuthenticated={setIsAuthenticated} onMovieClick={handleCardClick} />
   
         <div style={{ padding: "20px", color: "white" }}>
           <p style={{ textAlign: "left", fontSize: "19px", }}>
@@ -90,13 +91,8 @@ const ProfilePage = ({ setIsAuthenticated }) => {
           </p>
   
           {loadingGenres ? (
-        <div style={{
-          position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.6)",
-          display: "flex", alignItems: "center", justifyContent: "center", zIndex: 999,
-        }}>
-          <p style={{ color: "white", fontSize: "20px" }}>Loading movies ...</p>
-        </div>
-      ) : moviesByGenre.length > 0 ? (
+            <Spinner label="Loading movies..." />
+          ) : moviesByGenre.length > 0 ? (
             moviesByGenre.map((section, index) => (
               <div key={index} style={{ marginTop: "40px" }}>
                 <h2 style={{ marginBottom: "10px", textTransform: "capitalize", color: 'white' }}>
@@ -168,14 +164,7 @@ const ProfilePage = ({ setIsAuthenticated }) => {
         </div>
       </div>
       {/* Movie Modal mounted here, always on top */}
-      {loadingModal && (
-        <div style={{
-          position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.6)",
-          display: "flex", alignItems: "center", justifyContent: "center", zIndex: 999,
-        }}>
-          <p style={{ color: "white", fontSize: "20px" }}>Loading movie details...</p>
-        </div>
-      )}
+      {loadingModal && <Spinner label="Loading movie details..." fullscreen />}
       {modalOpen && selectedMovieId && (
         <MovieModal
           movie={selectedMovieId}
