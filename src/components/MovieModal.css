@@ -44,7 +44,7 @@
     column-gap: 2rem;
     row-gap: 0.75rem;
     color: #f9f9f9;
-    padding: 2rem;
+    padding: 1rem 2rem 0 2rem; /* top right bottom left */
   }
   
   .modal-header {
@@ -64,7 +64,7 @@
     gap: 1rem;
   }
   .icon {
-    width: 34px;   /* increased from 24px */
+    width: 34px;   
     height: 34px;
     color: white;
     cursor: pointer;
@@ -78,7 +78,6 @@
   }  
   
   .modal-details p {
-    margin: 0;
     font-size: 1rem;
   }
   
@@ -86,7 +85,6 @@
     display: block;
     font-size: 0.9rem;
     color: #bbbbbb;
-    margin-bottom: 0.2rem;
   }
   .tooltip {
     position: relative;
@@ -117,5 +115,50 @@
     opacity: 1;
   }
 
+  .movie-meta {
+    display: flex;
+    justify-content: flex-start;  /* or space-between / space-evenly if you want equal spacing */
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 1.3rem;  /* spacing between items */
+    font-size: 3.1rem;
+    opacity: 0.85;
+    margin-top: 0.2rem;
+    white-space: nowrap; /* prevents text wrapping */
+  }
+  
+  .modal-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 0rem 2rem 2rem 2rem; /* top right bottom left */
+  }
+  
+  .left-section {
+    flex: 0.8;        /* 80% width */
+    min-width: 0;     /* important to allow wrapping in flex layout */
+  }
+  
+  .left-section .plot {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    white-space: normal;
+    word-wrap: break-word;
+  }
+  
+  .right-section {
+    flex: 0.2;        /* 20% width */
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+    border-radius: 10px;
+  }
+  /* .modal-details {
+    outline: 1px solid red;
+  }
+  .modal-body {
+    outline: 1px solid blue;
+  } */
+  
   
   

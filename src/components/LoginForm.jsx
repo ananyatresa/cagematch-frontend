@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import "../components/LoginPage.css";
-
-const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
+import { auth, db } from "../utils/firebase_config";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
 
 const LoginForm = ({ setIsAuthenticated }) => {
   const [email, setEmail] = useState("");
@@ -13,17 +13,33 @@ const LoginForm = ({ setIsAuthenticated }) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${API_BASE_URL}/cagematch/login`, {
-        email,
-        password,
-      });
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const token = await userCredential.user.getIdToken();
+      localStorage.setItem("token", token);
+      console.log("Authenticated")
 
-      localStorage.setItem("token", res.data.access_token);
+      // Fetch user uid from firebase auth and use it to fetch username from firestore
+      const userDoc = await getDoc(doc(db, "users", userCredential.user.uid));
+      console.log(userDoc)
+      if (userDoc.exists()) {
+        const username = userDoc.data().username;
+        const watchlist = userDoc.data().watchlist;
+        console.log(username)
+        localStorage.setItem("username", username);
+        localStorage.setItem("watchlist", watchlist);
+      }
+      
       setIsAuthenticated(true);
       navigate("/profile");
     } catch (err) {
-      alert("Login failed");
       console.error(err);
+      if (err.code === "auth/wrong-password") {
+        alert("Incorrect password");
+      } else if (err.code === "auth/user-not-found") {
+        alert("User not found, please sign up");
+      } else {
+        alert("Login failed: " + err.message);
+      }
     }
   };
 

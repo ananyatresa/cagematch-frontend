@@ -8,15 +8,26 @@ import {
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import ProfilePage from "./pages/ProfilePage";
+import { auth } from "./utils/firebase_config";
+import { onAuthStateChanged } from "firebase/auth";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(null);
 
   useEffect(() => {
-    // check token on initial load
-    const token = localStorage.getItem("token");
-    setIsAuthenticated(!!token);
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const token = await user.getIdToken();
+        localStorage.setItem("token", token);
+        setIsAuthenticated(true);
+      } else {
+        setIsAuthenticated(false);
+      }
+    });
+    return () => unsubscribe();
   }, []);
+
+  if (isAuthenticated === null) return null;
 
   return (
     <Router>

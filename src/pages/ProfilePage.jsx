@@ -7,24 +7,36 @@ import MovieModal from "../components/MovieModal";
 
 
 const ProfilePage = ({ setIsAuthenticated }) => {
+  const [username, setUsername] = useState("");
   const [moviesByGenre, setMoviesByGenre] = useState([]);
   const [selectedMovieId, setSelectedMovieId] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [loadingGenres, setLoadingGenres] = useState(true);
+  const [loadingModal, setLoadingModal] = useState(false);
 
-  const handleCardClick = async (movieId) => {
-    const movie_details = await getMovieDetails(movieId);
-    setSelectedMovieId(movie_details);
-    setModalOpen(true);
-  };
+  useEffect(() => {
+    const storedName = localStorage.getItem("username");
+    if (storedName) setUsername(storedName);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoadingGenres(true);
       const result = await getMoviesByGenre();
       setMoviesByGenre(result);
+      setLoadingGenres(false);
     };
 
     fetchData();
   }, []);
+
+  const handleCardClick = async (movieId) => {
+    setLoadingModal(true);
+    const movie_details = await getMovieDetails(movieId);
+    setSelectedMovieId(movie_details);
+    setLoadingModal(false);
+    setModalOpen(true);
+  };
 
   const particlesInit = useCallback(async (engine) => {
     await loadFull(engine);
@@ -71,13 +83,20 @@ const ProfilePage = ({ setIsAuthenticated }) => {
   
         <div style={{ padding: "20px", color: "white" }}>
           <p style={{ textAlign: "left", fontSize: "19px", }}>
-            Welcome to CageMatch! <br/>
-            A one stop destination for all your Nick Cage movies. <br/>
-            Just pick a mood - Funny, Weird, Rage,  anything and we'll help you with a curated list of Cage's finest.
+            Hi {username}, Welcome to CageMatch !<br/> <br/>
+            A one stop destination for all your ICONIC Nicholas Cage movies. <br/>
+            Browse through different Nick Cage Moods - Funny, Weird, Rage and pick the one that matches you most. 
             
           </p>
   
-          {moviesByGenre.length > 0 ? (
+          {loadingGenres ? (
+        <div style={{
+          position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.6)",
+          display: "flex", alignItems: "center", justifyContent: "center", zIndex: 999,
+        }}>
+          <p style={{ color: "white", fontSize: "20px" }}>Loading movies ...</p>
+        </div>
+      ) : moviesByGenre.length > 0 ? (
             moviesByGenre.map((section, index) => (
               <div key={index} style={{ marginTop: "40px" }}>
                 <h2 style={{ marginBottom: "10px", textTransform: "capitalize", color: 'white' }}>
@@ -144,11 +163,19 @@ const ProfilePage = ({ setIsAuthenticated }) => {
               </div>
             ))
           ) : (
-            <p style={{ textAlign: "center" }}></p>
+            <p style={{ textAlign: "center", color: "white" }}>No movies found.</p>
           )}
         </div>
       </div>
       {/* Movie Modal mounted here, always on top */}
+      {loadingModal && (
+        <div style={{
+          position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.6)",
+          display: "flex", alignItems: "center", justifyContent: "center", zIndex: 999,
+        }}>
+          <p style={{ color: "white", fontSize: "20px" }}>Loading movie details...</p>
+        </div>
+      )}
       {modalOpen && selectedMovieId && (
         <MovieModal
           movie={selectedMovieId}
