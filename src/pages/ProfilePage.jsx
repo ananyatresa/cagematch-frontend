@@ -105,10 +105,9 @@ const ProfilePage = ({ setIsAuthenticated }) => {
                 </h2>
                 <div
                   style={{
-                    display: "flex",
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))",
                     gap: "20px",
-                    flexWrap: "wrap",
-                    justifyContent: "flex-start",
                   }}
                 >
                   {section.movies.map((movie) => (
@@ -120,7 +119,6 @@ const ProfilePage = ({ setIsAuthenticated }) => {
                         border: "1px solid #ccc",
                         borderRadius: "10px",
                         padding: "10px",
-                        width: "150px",
                         textAlign: "center",
                         backgroundColor:'rgb(53, 6, 101)',
                         boxShadow: "0 4px 6px rgba(7, 3, 3, 0.42)",

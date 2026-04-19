@@ -343,35 +343,67 @@
   font-size: 0.75rem;
 }
 
-@media (max-width: 600px) {
-  .navbar {
-    padding: 12px 14px;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
+@media (max-width: 900px) {
   .funky-title {
-    font-size: 20px;
-    transform: scale(1.3);
+    font-size: 24px;
+    transform: scale(1.5);
     transform-origin: left center;
   }
 
+  .search-bar {
+    width: 180px;
+  }
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    padding: 10px 14px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .navbar-left {
+    display: flex;
+    justify-content: center;
+  }
+
+  .funky-title {
+    font-size: 18px;
+    transform: scale(1);
+    margin-top: 0;
+  }
+
   .navbar-right {
-    gap: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
     flex: unset;
     width: 100%;
-    justify-content: flex-end;
+  }
+
+  .search-wrapper {
+    flex: 1;
   }
 
   .search-bar {
     width: 100%;
-    max-width: 200px;
     font-size: 13px;
+    padding: 8px 10px;
+    box-sizing: border-box;
   }
 
   .watchlist-btn {
     font-size: 12px;
     padding: 6px 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .profile-wrapper {
+    flex-shrink: 0;
   }
 
   .sidebar {
