@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+# CageMatch — Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React frontend for CageMatch, a Nicholas Cage movie browsing and watchlist app.
 
-## Available Scripts
+## Live Website
 
-In the project directory, you can run:
+https://cagematch-frontend-sage.vercel.app/
 
-### `npm start`
+## Live Demo
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+![alt text](<screenshots/Screenshot 2026-04-19 153811.png>)
+![alt text](<screenshots/Screenshot 2026-04-19 153625.png>)
+![alt text](<screenshots/Screenshot 2026-04-19 153652.png>)
+![alt text](<screenshots/Screenshot 2026-04-19 154202.png>)
+![alt text](<screenshots/Screenshot 2026-04-19 161918.png>)
+![alt text](<screenshots/Screenshot 2026-04-19 161829.png>)
+![alt text](<screenshots/Screenshot 2026-04-19 153722.png>)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Tech Stack
 
-### `npm test`
+- React 19, React Router 7
+- Firebase (authentication)
+- Axios (API calls)
+- Fuse.js (fuzzy search)
+- tsparticles (background animation)
+- Lucide React (icons)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Getting Started
 
-### `npm run build`
+```bash
+npm install
+npm start
+npm run build
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Environment Variables
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Create a `.env` file in this directory:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+REACT_APP_BACKEND_URL and REACT_APP_FIREBASE_CONFIG to be added here
+```
 
-### `npm run eject`
+## Project Structure
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+src/
+  components/    # Navbar, MovieModal, LoginForm, SignupForm, Spinner
+  pages/         # LoginPage, SignupPage, ProfilePage
+  services/      # movieService.js — all API calls
+  utils/         # Firebase client config
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Key Flows
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **Auth** — Firebase email/password auth.
+- **Browse** — `ProfilePage` fetches movies grouped by genre on load. Cards open a modal with full movie details, trailer, cast and OTT availability.
+- **Watchlist** — Bookmark icon in the movie modal toggles watchlist. The watchlist sidebar in the navbar fetches and displays saved movies.
+- **Search** — Fuzzy search via Fuse.js over the already-loaded movie list. Results appear as a dropdown with poster, title, year and score.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## App Steps
 
-## Learn More
+- Signup and create a new user profile
+- Login via Email and password
+- Once logged in, hover through movies and click on movie cards to find more details and trailer
+- Add a movie to watchlist by clicking the bookmark button near like, dislikes button.
+- View all your watchlisted movies by clicking the 'Watchlist🎬' button
+- Logout by clicking on the Nick Cage Face icon
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Furtre Enhancements
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Enabe like/dislike functionality
+- Add Nick Cage AI feature
