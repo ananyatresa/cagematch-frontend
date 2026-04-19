@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../components/LoginPage.css";
 import { auth, db } from "../utils/firebase_config";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 
 const LoginForm = ({ setIsAuthenticated }) => {
@@ -43,6 +43,19 @@ const LoginForm = ({ setIsAuthenticated }) => {
     }
   };
 
+  const handleForgotPassword = async () => {
+    if (!email) {
+      alert("Please enter your email address first.");
+      return;
+    }
+    try {
+      await sendPasswordResetEmail(auth, email);
+      alert("Password reset email sent! Check your inbox.");
+    } catch (err) {
+      alert("Failed to send reset email: " + err.message);
+    }
+  };
+
   return (
     <form onSubmit={handleLogin} className="login-form">
       <h2>Login</h2>
@@ -64,6 +77,15 @@ const LoginForm = ({ setIsAuthenticated }) => {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
+
+      <div style={{ textAlign: "right", marginTop: "-8px" }}>
+        <span
+          onClick={handleForgotPassword}
+          style={{ fontSize: "12px", color: "#6a0dad", cursor: "pointer" }}
+        >
+          Forgot password?
+        </span>
+      </div>
 
       <button type="submit">Login</button>
 

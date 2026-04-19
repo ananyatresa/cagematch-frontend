@@ -5,6 +5,7 @@ import { loadFull } from "tsparticles";
 import { getMoviesByGenre, getMovieDetails } from "../services/movieService";
 import MovieModal from "../components/MovieModal";
 import Spinner from "../components/Spinner";
+import { Italic } from "lucide-react";
 
 
 const ProfilePage = ({ setIsAuthenticated }) => {
@@ -80,13 +81,18 @@ const ProfilePage = ({ setIsAuthenticated }) => {
   
       {/* Foreground Content */}
       <div style={{ position: "relative", zIndex: 1 }}>
-        <Navbar setIsAuthenticated={setIsAuthenticated} onMovieClick={handleCardClick} />
+        <Navbar
+          setIsAuthenticated={setIsAuthenticated}
+          onMovieClick={handleCardClick}
+          allMovies={[...new Map(moviesByGenre.flatMap(s => s.movies).map(m => [m.movie_id, m])).values()]}
+        />
   
         <div style={{ padding: "20px", color: "white" }}>
           <p style={{ textAlign: "left", fontSize: "19px", }}>
-            Hi {username}, Welcome to CageMatch !<br/> <br/>
-            A one stop destination for all your ICONIC Nicholas Cage movies. <br/>
-            Browse through different Nick Cage Moods - Funny, Weird, Rage and pick the one that matches you most. 
+            Hi {username}, Welcome to CageMatch!<br/> <br/>
+            Not all heroes wear capes. Some wear a new <em>Face</em> and laugh through the flames. <br/>
+            Okaaaay. Lets ride! 
+
             
           </p>
   
@@ -163,6 +169,20 @@ const ProfilePage = ({ setIsAuthenticated }) => {
           )}
         </div>
       </div>
+      {/* Footer */}
+      <div style={{
+        textAlign: "center", padding: "20px", marginTop: "40px",
+        borderTop: "1px solid rgba(255,255,255,0.1)",
+        color: "#888", fontSize: "12px", position: "relative", zIndex: 1,
+      }}>
+        <img
+          src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg"
+          alt="TMDB"
+          style={{ height: "12px", verticalAlign: "middle", marginRight: "6px", opacity: 0.6 }}
+        />
+        This application uses TMDB and the TMDB APIs but is not endorsed, certified, or otherwise approved by TMDB.
+      </div>
+
       {/* Movie Modal mounted here, always on top */}
       {loadingModal && <Spinner label="Loading movie details..." fullscreen />}
       {modalOpen && selectedMovieId && (
