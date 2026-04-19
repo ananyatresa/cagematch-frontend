@@ -16,15 +16,12 @@ const LoginForm = ({ setIsAuthenticated }) => {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const token = await userCredential.user.getIdToken();
       localStorage.setItem("token", token);
-      console.log("Authenticated")
 
       // Fetch user uid from firebase auth and use it to fetch username from firestore
       const userDoc = await getDoc(doc(db, "users", userCredential.user.uid));
-      console.log(userDoc)
       if (userDoc.exists()) {
         const username = userDoc.data().username;
         const watchlist = userDoc.data().watchlist;
-        console.log(username)
         localStorage.setItem("username", username);
         localStorage.setItem("watchlist", watchlist);
       }
