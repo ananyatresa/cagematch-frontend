@@ -5,7 +5,6 @@ import { loadFull } from "tsparticles";
 import { getMoviesByGenre, getMovieDetails } from "../services/movieService";
 import MovieModal from "../components/MovieModal";
 import Spinner from "../components/Spinner";
-import { Italic } from "lucide-react";
 
 
 const ProfilePage = ({ setIsAuthenticated }) => {
@@ -88,10 +87,10 @@ const ProfilePage = ({ setIsAuthenticated }) => {
         />
   
         <div style={{ padding: "20px", color: "white" }}>
-          <p style={{ textAlign: "left", fontSize: "19px", }}>
+          <p style={{ textAlign: "left", fontSize: "19px", textShadow: "0 2px 6px rgba(0,0,0,0.9), 0 0 12px rgba(0,0,0,0.7)" }}>
             Hi {username}, Welcome to CageMatch!<br/> <br/>
-            Not all heroes wear capes. Some wear a new <em>Face</em> and laugh through the flames. <br/>
-            Okaaaay. Lets ride! 
+            Not all heroes wear capes. Some wear a new <em>Face</em> and <em>Ride</em> through flames. <br/>
+            And somewhere between Fine and Absolutely Unhinged lives your mood right now. So Pick your Cage energy and let the chaos begin!
 
             
           </p>

@@ -9,7 +9,7 @@
     "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^13.5.0",
     "@tsparticles/engine": "^3.8.1",
-    "axios": "^1.8.1",
+    "axios": "^1.15.0",
     "firebase": "^12.4.0",
     "framer-motion": "^12.23.6",
     "fuse.js": "^7.3.0",
