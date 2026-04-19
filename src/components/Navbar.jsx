@@ -113,8 +113,8 @@ export default function Navbar({ setIsAuthenticated, onMovieClick, allMovies = [
                         </button>
                         {dropdownOpen && (
                             <div className="dropdown">
-                                <div className="dropdown-item">View Profile</div>
-                                <div className="dropdown-item">Account Settings</div>
+                                {/* <div className="dropdown-item">View Profile</div>
+                                <div className="dropdown-item">Account Settings</div> */}
                                 <div className="dropdown-item" onClick={handleLogout}>Logout</div>
                             </div>
                         )}
